@@ -12,6 +12,45 @@ $database = new Database();
 $db = $database->getConnection();
 
 // инициализируем объект 
-$product = new Order($db);
+$order = new Order($db);
  
-// чтение закаов будет здесь
+// запрашиваем заказы 
+$stmt = $order->read();
+$num = $stmt->rowCount();
+
+// проверка, найдено ли больше 0 записей 
+if ($num>0) {
+
+    // массив товаров 
+    $orders_arr=array();
+    $orders_arr["records"]=array();
+
+    // получаем содержимое нашей таблицы 
+    // fetch() быстрее, чем fetchAll() 
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+
+        // извлекаем строку 
+        extract($row);
+
+        $order_item=array(
+            "id" => $id,
+            "date" => $date,
+            "timeslot" => $timeslot,
+            "name" => $name,
+            "phone" => $phone,
+            "email" => $email,
+            "address" => $address,
+            "status" => html_entity_decode($status)
+        );
+
+        array_push($orders_arr["records"], $order_item);
+    }
+
+    // устанавливаем код ответа - 200 OK 
+    http_response_code(200);
+
+    // выводим данные о товаре в формате JSON 
+    echo json_encode($orders_arr);
+}
+
+// 'товары не найдены' будет здесь
