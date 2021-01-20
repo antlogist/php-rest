@@ -13,9 +13,10 @@ $db = $database->getConnection();
 
 // инициализируем объект 
 $order = new Order($db);
- 
+
 // запрашиваем заказы 
 $stmt = $order->read();
+
 $num = $stmt->rowCount();
 
 // проверка, найдено ли больше 0 записей 
@@ -51,6 +52,11 @@ if ($num>0) {
 
     // выводим данные о товаре в формате JSON 
     echo json_encode($orders_arr);
-}
+} else {
 
-// 'товары не найдены' будет здесь
+    // установим код ответа - 404 Не найдено 
+    http_response_code(404);
+
+    // сообщаем пользователю, что товары не найдены 
+    echo json_encode(array("message" => "Orders not found."), JSON_UNESCAPED_UNICODE);
+}

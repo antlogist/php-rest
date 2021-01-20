@@ -20,6 +20,18 @@ class Order {
         $this->conn = $db;
     }
 
-    // здесь будет метод read() 
+  // метод read() - получение заказов 
+  function read(){
+      // выбираем все записи 
+    $query = "SELECT id, date, timeslot, name, phone, email, address, status FROM " . $this->table_name;
+
+      // подготовка запроса 
+      $stmt = $this->conn->prepare($query);
+
+      // выполняем запрос 
+      $stmt->execute();
+
+      return $stmt;
+  }
 }
 ?>
