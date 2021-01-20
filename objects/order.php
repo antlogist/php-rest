@@ -23,15 +23,7 @@ class Order {
   // метод read() - получение заказов 
   function read(){
       // выбираем все записи 
-      $query = "SELECT
-                  c.date as date, p.id, p.date, p.timeslot, p.name, p.phone, p.email, p.address, p.status
-              FROM
-                  " . $this->table_name . " p
-                  LEFT JOIN
-                      categories c
-                          ON p.category_id = c.id
-              ORDER BY
-                  p.date DESC";
+    $query = "SELECT id, date, timeslot, name, phone, email, address, status FROM " . $this->table_name;
 
       // подготовка запроса 
       $stmt = $this->conn->prepare($query);
