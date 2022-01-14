@@ -1,0 +1,4 @@
+export default {
+  SET_ANSWERS: "SET_ANSWERS",
+  GET_PRODUCTS: "GET_PRODUCTS",
+};
