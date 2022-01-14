@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import answers from "./modules/answers";
+import userAnswers from "./modules/userAnswers";
 
 Vue.use(Vuex);
 
@@ -9,6 +9,6 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    answers,
+    userAnswers,
   }
 });
