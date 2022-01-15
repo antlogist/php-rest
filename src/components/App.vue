@@ -1,37 +1,54 @@
+<!--src/components/App.vue-->
+
 <template>
-  <div>
+  <div class="container">
     <div class="checkboxes-wrapper">
 
       <div class="answerone-wrapper">
         <input type="checkbox" id="answerOne" v-model="answerOne">
-        <label for="answerOne">Maxime similique ab debitis aliquid! Ea accusantium harum ducimus animi. Facilis?</label>
+        <label for="answerOne">1. Lorem ipsum dolor sit amet, consectetur adipisicing elit?</label>
       </div>
 
       <div class="answerone-wrapper">
         <input type="checkbox" id="answerTwo" v-model="answerTwo">
-        <label for="answerTwo">Maxime similique ab debitis aliquid! Ea accusantium harum ducimus animi. Facilis?</label>
+        <label for="answerTwo">2. Lorem ipsum dolor sit amet, consectetur adipisicing elit?</label>
       </div>
 
       <div class="answerone-wrapper">
         <input type="checkbox" id="answerThree" v-model="answerThree">
-        <label for="answerThree">Maxime similique ab debitis aliquid! Ea accusantium harum ducimus animi. Facilis?</label>
+        <label for="answerThree">3. Lorem ipsum dolor sit amet, consectetur adipisicing elit?</label>
       </div>
 
       <div class="answerone-wrapper">
         <input type="checkbox" id="answerFour" v-model="answerFour">
-        <label for="answerFour">Maxime similique ab debitis aliquid! Ea accusantium harum ducimus animi. Facilis?</label>
+        <label for="answerFour">4. Lorem ipsum dolor sit amet, consectetur adipisicing elit?</label>
       </div>
 
       <div class="answerone-wrapper">
         <input type="checkbox" id="answerFive" v-model="answerFive">
-        <label for="answerFive">Maxime similique ab debitis aliquid! Ea accusantium harum ducimus animi. Facilis?</label>
+        <label for="answerFive">5. Lorem ipsum dolor sit amet, consectetur adipisicing elit?</label>
       </div>
 
     </div>
 
     <h2>Products:</h2>
 
-    {{ products }}
+    <div class="row">
+      <div
+        class="col-sm-3 mb-3"
+        v-for="(product, index) in products"
+        :key="'product-' + index">
+        <div class="card">
+          <img :src="product.image_path" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-outline">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </template>
