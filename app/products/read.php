@@ -20,11 +20,14 @@ $product = new Product($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
-$product->answer_one   = ($data->answer_one)   ? $data->answer_one   : 0;
-$product->answer_two   = ($data->answer_two)   ? $data->answer_two   : 0;
-$product->answer_three = ($data->answer_three) ? $data->answer_three : 0;
-$product->answer_four  = ($data->answer_four)  ? $data->answer_four  : 0;
-$product->answer_five  = ($data->answer_five)  ? $data->answer_five  : 0;
+// echo json_encode($data);
+// exit;
+
+$product->answer_one   = ($data->answer_one->answer)   ? $data->answer_one->answer   : 0;
+$product->answer_two   = ($data->answer_two->answer)   ? $data->answer_two->answer   : 0;
+$product->answer_three = ($data->answer_three->answer) ? $data->answer_three->answer : 0;
+$product->answer_four  = ($data->answer_four->answer)  ? $data->answer_four->answer  : 0;
+$product->answer_five  = ($data->answer_five->answer)  ? $data->answer_five->answer  : 0;
 
 // Request products
 $stmt = $product->read();
