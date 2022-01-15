@@ -22,17 +22,16 @@ const answersStore = {
     },
   },
   actions: {
-    async getProducts({ commit }) {
+    async getProducts({ state, commit }) {
 
       try {
-        const data = {
-          'answer_one': false
-        };
+        const data = state.answers;
         const response = await axios.post(`./app/products/read.php`, data);
 
         const message = response.data.message;
         if(message) {
           console.log(message);
+          commit('SET_PRODUCTS', []);
           return message;
         }
 

@@ -30,6 +30,7 @@
     </div>
 
     <h2>Products:</h2>
+
     {{ products }}
 
   </div>
@@ -42,6 +43,9 @@ export default {
     return {
       test: "test"
     }
+  },
+  created() {
+    this.getProducts();
   },
   computed: {
     ...mapGetters("userAnswers", ["products", "answers"]),
