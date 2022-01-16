@@ -1,37 +1,42 @@
 <!--src/components/App.vue-->
 
 <template>
-  <div class="container">
-    <div class="checkboxes-wrapper">
+  <div class="container app-inner-wrapper mb-5">
 
-      <div class="answerone-wrapper">
-        <input type="checkbox" id="answerOne" v-model="answerOne">
-        <label for="answerOne">1. Lorem ipsum dolor sit amet, consectetur adipisicing elit?</label>
+    <div class="sample-title-wrapper mt-2 mb-4">
+      <h2>Demo App</h2>
+    </div>
+
+    <div class="checkboxes-wrapper mb-3">
+
+      <div class="answer-wrapper form-check mb-1">
+        <input class="form-check-input" type="checkbox" id="answerOne" v-model="answerOne">
+        <label class="form-check-label" for="answerOne">1. Non-Animal</label>
       </div>
 
-      <div class="answerone-wrapper">
-        <input type="checkbox" id="answerTwo" v-model="answerTwo">
-        <label for="answerTwo">2. Lorem ipsum dolor sit amet, consectetur adipisicing elit?</label>
+      <div class="answer-wrapper form-check mb-1">
+        <input class="form-check-input" type="checkbox" id="answerTwo" v-model="answerTwo">
+        <label class="form-check-label" for="answerTwo">2. Waterproof outer</label>
       </div>
 
-      <div class="answerone-wrapper">
-        <input type="checkbox" id="answerThree" v-model="answerThree">
-        <label for="answerThree">3. Lorem ipsum dolor sit amet, consectetur adipisicing elit?</label>
+      <div class="answer-wrapper form-check mb-1">
+        <input class="form-check-input" type="checkbox" id="answerThree" v-model="answerThree">
+        <label class="form-check-label" for="answerThree">3. Warm</label>
       </div>
 
-      <div class="answerone-wrapper">
-        <input type="checkbox" id="answerFour" v-model="answerFour">
-        <label for="answerFour">4. Lorem ipsum dolor sit amet, consectetur adipisicing elit?</label>
+      <div class="answer-wrapper form-check mb-1">
+        <input class="form-check-input" type="checkbox" id="answerFour" v-model="answerFour">
+        <label class="form-check-label" for="answerFour">4. Chunky</label>
       </div>
 
-      <div class="answerone-wrapper">
-        <input type="checkbox" id="answerFive" v-model="answerFive">
-        <label for="answerFive">5. Lorem ipsum dolor sit amet, consectetur adipisicing elit?</label>
+      <div class="answer-wrapper form-check mb-1">
+        <input class="form-check-input" type="checkbox" id="answerFive" v-model="answerFive">
+        <label class="form-check-label" for="answerFive">5. Low heel / flat</label>
       </div>
 
     </div>
 
-    <h2>Products:</h2>
+    <h4>Products:</h4>
 
     <div class="row">
       <div
@@ -42,9 +47,8 @@
           <img :src="product.image_path" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-outline">Add to Cart</a>
+            <p class="card-text" v-html="product.description"></p>
+            <a href="#" @click="addToCart" class="btn btn-outline">Add to Cart</a>
           </div>
         </div>
       </div>
@@ -125,6 +129,62 @@ export default {
   },
   methods: {
     ...mapActions("userAnswers", ["getProducts", "setAnswers"]),
+    addToCart(product) {
+      console.log(product.title);
+    }
   },
 }
 </script>
+<style lang="scss">
+$color: #ffff;
+$color-2: #253f46;
+
+.app-inner-wrapper {
+  .checkboxes-wrapper {}
+  .card {
+    .card-body {
+      .card-title {
+      }
+      .card-text {
+        .false {
+          opacity: 0.25;
+        }
+      }
+
+    }
+  }
+}
+</style>
+<style lang="scss" scoped>
+$color: #ffff;
+$color-2: #253f46;
+.app-inner-wrapper {
+  padding: 15px;
+  background-color: $color;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  .checkboxes-wrapper {}
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    .card-body {
+      flex: 1 1 auto;
+      padding: 1rem 1rem;
+      background-color: $color-2;
+      .card-title {
+        color: $color;
+      }
+      .card-text {
+        color: $color;
+      }
+
+    }
+  }
+}
+</style>
