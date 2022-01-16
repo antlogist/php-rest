@@ -26,6 +26,7 @@ const answersStore = {
 
       try {
         const data = state.answers;
+        // const response = await axios.post(`${themeUrl}/api/filter-tool/app/products/read2.php`, data);
         const response = await axios.post(`./app/products/read.php`, data);
 
         const message = response.data.message;
