@@ -1,10 +1,12 @@
 <?php
 
+//app/products/read.php
+
 header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header("Access-Control-Allow-Headers: access");
+header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Credentials: true");
+header("Content-Type: application/json");
 
 
 // Include files
@@ -19,9 +21,6 @@ $db = $database->conn;
 $product = new Product($db);
 
 $data = json_decode(file_get_contents("php://input"));
-
-// echo json_encode($data);
-// exit;
 
 $product->answer_one   = ($data->answer_one->answer)   ? $data->answer_one->answer   : 0;
 $product->answer_two   = ($data->answer_two->answer)   ? $data->answer_two->answer   : 0;
@@ -50,6 +49,7 @@ if($num > 0) {
       'price' => $price,
       'category_id' => $category_id,
       'sub_category_id' => $sub_category_id,
+      'image_path' => $image_path
     );
 
     array_push($products_arr["products"], $product_item);
@@ -57,12 +57,11 @@ if($num > 0) {
   }
 
   http_response_code(200);
-
   echo json_encode($products_arr);
 
 } else {
-  http_response_code(200);
 
+  http_response_code(200);
   echo json_encode(array("message" => "Products not found"), JSON_UNESCAPED_UNICODE);
 }
 

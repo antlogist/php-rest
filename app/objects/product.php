@@ -1,5 +1,7 @@
 <?php
 
+//app/objects/product.php
+
 class Product {
   private $conn;
   private $table_name = "products";
@@ -16,6 +18,7 @@ class Product {
 
   public function read() {
 
+    //Select all the products if the user hasn’t answered any questions
     if(
         $this->answer_one == 0 &&
         $this->answer_two == 0 &&
@@ -25,7 +28,9 @@ class Product {
 
         ) {
 
-        $query = "SELECT id, name, description, price, category_id, sub_category_id, created_at
+        $query = "SELECT id, name, description, price,
+                        category_id, sub_category_id,
+                        created_at, image_path
               FROM " . $this->table_name;
 
     } else {
@@ -33,6 +38,7 @@ class Product {
       $sqlReq = '';
       $answers = [];
 
+      //Get answers array
       foreach ($this as $key => $value) {
         if (!in_array($key, ['conn', 'table_name']) ) {
           if($value) {
@@ -41,6 +47,7 @@ class Product {
         }
       }
 
+      //Create the SQL request to the database
       $i = 0;
       foreach ($answers as $answer) {
 
@@ -53,15 +60,17 @@ class Product {
         $i++;
       }
 
-      $query = "SELECT id, name, description, price, category_id, sub_category_id, created_at
+      $query = "SELECT id, name, description, price,
+                       category_id, sub_category_id,
+                       created_at, image_path
         FROM " . $this->table_name . " WHERE " . $sqlReq;
 
     }
 
-    // Prepare query
+    //Prepare query
     $req = $this->conn->prepare($query);
 
-    // Ececute query
+    //Ececute query
     $req->execute();
 
     return $req;

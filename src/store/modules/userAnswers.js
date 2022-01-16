@@ -26,6 +26,7 @@ const answersStore = {
 
       try {
         const data = state.answers;
+        // const response = await axios.post(`${themeUrl}/api/filter-tool/app/products/read2.php`, data);
         const response = await axios.post(`./app/products/read.php`, data);
 
         const message = response.data.message;
@@ -37,15 +38,11 @@ const answersStore = {
 
         const products = response.data.products;
 
-        console.log(products);
-
         commit('SET_PRODUCTS', products);
 
         return response;
       } catch(error) {
         console.log(error);
-      } finally {
-        console.log("finally");
       }
     },
     setAnswers({ commit, dispatch }, { answerNum, answer }) {
@@ -53,7 +50,6 @@ const answersStore = {
 
       dispatch("getProducts", null, { root: false });
 
-      console.log(this.state);
     }
   },
 };
